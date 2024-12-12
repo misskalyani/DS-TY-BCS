@@ -1,0 +1,715 @@
+ANMOL WADHWA
+CS-358 Practical Course based on CS - 353 and CS – 354
+Web Technologies-I and Foundations of Data Science
+					SLIP-1
+1)Write a PHP program to read Flat file’Student.dat’ that has student details as roll no, name, m1,m2,m3 as mark of three subjects. Display the data from the file in tabular format. Also display total and percentage of each student.
+<?php
+$fh=fopen("student.dat","r");
+if($fh==false)
+{
+	die("File Not Found");
+}
+echo("student record");
+echo("<table border=1>");
+echo("<tr><th>Roll_No</th>");
+echo("<th>Name</th>");
+echo("<th>m1</th>");
+echo("<th>m2</th>");
+echo("<th>m3</th>");
+echo("<th>tot</th>");
+echo("<th>per</th>");
+$tot=0;
+while(!feof($fh))
+{
+	$s=fgets($fh);
+	echo("<tr><td>".$a[0]."<td>".$a[1]."<td>".$a[2]."<td>".$a[3]."<td>".$a[4]);
+	$tot=$a[2]+$a[3]+$a[4];
+	echo("<td>".$tot);
+	$per=$tot/3;
+	echo("<td>".$per."</tr>");
+}
+echo("</table>");
+?>
+
+2)Write a python program to create a dataframe of student information containing columns name,class and percentage. Add 10 record to the dataframe . View the dataframe. Display data in bargraph
+import pandas as pd
+from matplotlib import pyplot as plt
+data={'Name':['om','sai','ram','dd','ee','ff','gg','hh','ii','jj'],
+'Class':['ty','ty','ty','ty','ty','ty','ty','ty','ty','ty'],
+'Per':[99,85,67,78,99,67,76,77,87,81]}
+df=pd.DataFrame(data)
+df.plot(kind="bar")
+plt.show()
+
+						SLIP2
+1)Write a menu driven program to perform the following stack related operations. i) Insert an element in stack. ii) Delete an element from stack.[Hint: Use array_push(), array_pop()]
+<html>
+<body>
+<form method="post" action=stack_opr.php>
+	 i) Insert an element in stack. <br>
+2) Delete an element from stack.  <br>
+	Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+</form>
+</body>
+</html>
+<?php
+ $ch=$_POST["t1"];
+ $a=array(10,20,30,40,50);
+ switch($ch)
+ {
+	 case 1:array_push($a,5);
+	print_r($a);
+	break;
+	 case 2:$val=array_pop($a);
+	echo("Deleted value=".$val);
+print_r($a);
+break; 				
+ }
+?>
+
+2. Write a python program for to create one dataframe of (10,20,30,40,50,60,70,80,90,100,110,120 )data values. Find out Arithmetic Mean, Harmonic Mean, Geometric Mean, Mode, Median, Range, and IQR for this data
+import statistics as st
+import numpy as np
+data={10,20,30,40,50,60,70,80,90,100,110,120}
+print("Arithmetic mean:",st.mean(data),end=" ")
+print("\nGeometric mean:",st.geometric_mean(data),end=" ")
+print("\nHarmonic mean:",st.harmonic_mean(data),end=" ")
+print("\nMedian",st.median(data),end=" ")
+print("\nMode",st.mode(data),end=" ")
+range=max(data)-min(data)
+print("\nRange:",range)
+q=st.quantiles(data)
+IQR=q[2]-q[0]
+print("IQR:",IQR)
+
+						SLIP3
+1)Write a PHP program to read a directory name and extension form user. Display the files with specified extension from that directory. 
+<html>
+<body>
+<form method="post" action="dir_ext.php">
+	Enter the directory name: <br>
+	<input type="text" name="t1">
+	Enter the extension:
+	<input type="text" name="t2">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+<?php
+ $dir=$_POST["t1"];
+ $ext=$_POST["t2"];
+ $dh=opendir($dir);
+ if($dh==false)
+	 die("Directory not found");
+ echo("Directory found");
+ while($f=readdir($dh))
+ {
+	 if(strstr($f,$ext))
+		 echo($f);
+ }
+?>
+2)Write a python program for to compute the Euclidean distance between two points.
+from scipy.spatial import distance
+a=(1,2,3)
+b=(4,5,6)
+print(distance.euclidean(a,b))
+
+						SLIP4	
+Write a PHP Script to accept customer Name from user and do the following a) Transform Customer Name all Upper case latter. b) Make First character to Upper Case. 
+<html>
+<body>
+<form method="post" action="cust.php">
+      Enter Customer Name::
+<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+
+<?php
+$name=$_POST["t1"];
+$u=strtoupper($name);
+echo($u);
+echo("<br>");
+$v=ucfirst($name);
+echo($v);
+?>
+2)Write a python program for to compute the Manhattan distance between two points.
+from scipy.spatial import distance
+a=(1,2,3)
+b=(4,5,6)
+print(distance.cityblock())
+
+						SLIP5
+1. Write a menu driven program to perform the following operation on an associative array. a) Display the elements of an array along wth key. b) Display the size of an array.<html>
+<body>
+<form method="post" action="asso.php">
+a) Display the elements of an array along wth key.<br>
+b) Display the size of an array.<br>
+Enter Any Choice::
+<input type="text" name="t1">
+<input type="submit" value="OK">
+</form>
+</body>
+</html>
+
+
+<?php
+ $a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:ksort($a);
+	        print_r($a);
+			break;
+	 case 2:$s=sizeof($a);
+	        echo($s);
+			break;
+ }
+?>
+2)Write a python program for to compute the Minkowski distance between two points.
+from scipy.spatial import distance
+a=(4,2,9)
+b=(9,5,6)
+print(distance.minkowski(a,b))
+
+						SLIP6
+Write a menu driven program following operation on an associative array a)Reverse the order of each element’s key-value pair. b) Traverse the element in an array in random order.
+<html>
+<body>
+<form method="post" action=array_fun.php>
+	 i) Reverse the order of each element’s key-value pair. <br>
+     2)  Traverse the element in an array in random order.  <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:krsort($a);
+	        echo("Key-value pair in reverse order:");
+	        print_r($a);
+			break;
+	 case 2:shuffle($a);
+	        print_r($a);
+			break;
+ }
+?>
+Write a python program to create a dataframe of student information containing columns name, age and percentage. Add 10 record to the dataframe . Display average of percentage. And also describe all basic statistics of data.(Hint: Use describe()).
+import pandas as pd
+data={'Name':['aa','bb','cc','dd','ee','ff','gg','hh','ii','jj'],
+'Class':['ty','ty','ty','ty','ty','ty','ty','ty','ty','ty'],
+'Per':[99,85,67,78,99,67,76,77,87,81]}
+df=pd.DataFrame(data)
+print(df)
+print("Average of Per:",df['Per'].mean())
+
+						SLIP7
+Write a menu driven program to perform various file operations. Accept filename from user. a) Display type of file. b) Delete a file. 
+<html>
+<body>
+<form method="post" action=stack_opr.php>
+	 Enter the filename:
+	<input type="text" name="t1">
+	 i) Display type of file. <br>
+     2) Delete a file  <br>
+	 Enter the choice:
+	<input type="text" name="t2">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+ $file=$_POST["t1"]; 
+ $ch=$_POST["t2"];
+ $f=fopen($file,"r");
+ if($f==false)
+	 die("File not found");
+ while(!feof($f))
+ {
+	 $r=fread($f);
+	 echo($r);
+ }
+ switch($ch)
+ {
+	 case 1:$type=filetype($f);
+	        echo("Type of file:".$type);
+	        break;
+	 case 2:unlink($f);
+	        echo("File deleted");
+			break;
+ }
+?>
+2.Write a python program for equal width Binning
+
+						SLIP8	
+1. Write php script to sort the following associative array Array(“Sophia=>”31”,”Jacob”=>”41”,”William”=>”39”,”Ramesh”=>”40”); a) Ascending order sort by value b) Ascending order sort by key
+<html>
+<body>
+<form method="post" action=asso.php>
+	 i) Ascending order sort by value <br>
+     2) Ascending order sort by key <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$ch=$_POST["t1"];
+$a=array("Sophia"=>"31","Jacob"=>"41","William"=>"39","Ramesh"=>"40");
+switch($ch)
+{
+	case 1: sort($a);
+	         print_r($a);
+			 break;
+	
+    case 2: ksort($a);
+             print_r($a);
+             break;
+}
+?>			
+
+ 2. Write a python program to create a dataframe of data values:( 15,30,45,60,75,90,105,120,135,150). Find out Mean, Median, Mode, Range, Standard Deviation of this data
+import statistics as st
+data=(15,30,45,60,75,90,105,120,135,150)
+print("Mean:",st.mean(data))
+print("Mode:",st.mode(data))
+print("Median:",st.median(data))
+range=max(data)-min(data)
+print("Range:",range)
+print("Standard deviation:",st.pstdev(data))
+
+						SLIP9
+1. Write php script to sort the following associative array Array(“Sophia=>”41”,”Jacob”=>”61”,”William”=>”29”,”Ramesh”=>”30”); a) Descending order sort by value b) Descending order sort by key
+<html>
+<body>
+<form method="post" action=sort.php>
+	 i) Decending order sort by value <br>
+     2) Decending order sort by key <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$ch=$_POST["t1"];
+$a=array("Sophia"=>"31","Jacob"=>"41","William"=>"39","Ramesh"=>"40");
+switch($ch)
+{
+	case 1: arsort($a);
+	         print_r($a);
+			 break;
+	
+    case 2: krsort($a);
+             print_r($a);
+             break;
+}
+?>			
+
+ 2.Write a program to create two lists, one representing subject names and other representing marks obtaining in those subject. Display the data in pie chart and bar chart
+from matplotlib import pyplot as pt
+import pandas as pd
+data={'sub':['PHP','DS'],'marks':[90,99]}
+d=pd.DataFrame(data)
+
+d.plot(kind="bar")
+pt.show()
+						SLIP10
+1.. Write a menu driven program to perform the following operation on an associative array. a) Display the elements of an array along with key. b) Display the size of an array.
+<html>
+<body>
+<form method="post" action="asso.php">
+a) Display the elements of an array along wth key.<br>
+b) Display the size of an array.<br>
+Enter Any Choice::
+<input type="text" name="t1">
+<input type="submit" value="OK">
+</form>
+</body>
+</html>
+
+
+<?php
+ $a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:ksort($a);
+	        print_r($a);
+			break;
+	 case 2:$s=sizeof($a);
+	        echo($s);
+			break;
+ }
+ ?>
+ 2. Write a python program to generate random array of 15 integers and display them using a line chart, scatter plot, histogram, and box plot. Apply appropriate color, labels and styling options.
+						SLIP11
+1. Write a PHP program to read Flat file’Employee.dat’ that has emp details as e no, ename, HRA,DA,BASIC as Salary of employee. Display the data from the file in tabular format. Also display total salary of each employee. 
+
+2. Write a program to create two lists, one representing programming language names and other representing usage of that languages. Display the data in pie chart and bar chart.
+from matplotlib import pyplot as pt
+import pandas as pd
+data={'sub':['PHP','DS'],'marks':[90,99]}
+d=pd.DataFrame(data)
+
+d.plot(kind="bar")
+pt.show()
+
+						SLIP12
+1. Write a menu driven program to perform the following stack related operations. i) Insert an element in stack. ii) Delete an element from stack.[Hint: Use array_push(), array_pop()]
+<html>
+<body>
+<form method="post" action=stack_opr.php>
+	 i) Insert an element in stack. <br>
+     2) Delete an element from stack.  <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+<?php
+ $ch=$_POST["t1"];
+ $a=array(10,20,30,40,50);
+ switch($ch)
+ {
+	 case 1:array_push($a,5);
+	        print_r($a);
+			break;
+	 case 2:$val=array_pop($a);
+	        echo("Deleted value=".$val);
+            print_r($a);
+            break; 			
+ }
+?>
+
+2. Write a python program to create a dataframe of employee information containing columns name, age and salary. Add 10 record to the dataframe . View the dataframe. Display data in bargraph
+import pandas as pd
+from matplotlib import pyplot as plt
+data={'Name':['aa','bb','cc','dd','ee','ff','gg','hh','ii','jj'],
+'Age':[34,21,33,22,55,33,24,45,55,65],
+'Salary':[99222,85111,67333,78444,99666,67500,76000,77000,87324,81111]}
+df=pd.DataFrame(data)
+df.plot(kind="bar")
+plt.show()
+
+						SLIP13
+1. Write a PHP program to read a directory name and extension form user. Display the files with specified extension from that directory. 
+<html>
+<body>
+<form method="post" action="dir_ext.php">
+	Enter the directory name: <br>
+	<input type="text" name="t1">
+	Enter the extension:
+	<input type="text" name="t2">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+<?php
+ $dir=$_POST["t1"];
+ $ext=$_POST["t2"];
+ $dh=opendir($dir);
+ if($dh==false)
+	 die("Directory not found");
+ echo("Directory found");
+ while($f=readdir($dh))
+ {
+	 if(strstr($f,$ext))
+		 echo($f);
+ }
+?>
+2.Write a python program for to create one dataframe of (45,67,80,56,32,78,56,35,95,60 ) data values. Find out Arithmetic Mean, Harmonic Mean, Geometric Mean, Mode, Median, Range, and IQR for this data
+import statistics as st
+import numpy as np
+data={10,20,30,40,50,60,70,80,90,100,110,120}
+print("Arithmetic mean:",st.mean(data),end=" ")
+print("\nGeometric mean:",st.geometric_mean(data),end=" ")
+print("\nHarmonic mean:",st.harmonic_mean(data),end=" ")
+print("\nMedian",st.median(data),end=" ")
+print("\nMode",st.mode(data),end=" ")
+range=max(data)-min(data)
+print("\nRange:",range)
+q=st.quantiles(data)
+IQR=q[2]-q[0]
+print("IQR:",IQR)
+
+						SLIP14
+
+1.Write a PHP Script to accept customer Name from user and do the following a) Transform Customer Name all Upper case latter. b) Make First character to Upper Case.
+<html>
+<body>
+<form method="post" action="cust.php">
+      Enter Customer Name::
+<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+
+<?php
+$name=$_POST["t1"];
+$u=strtoupper($name);
+echo($u);
+echo("<br>");
+$v=ucfirst($name);
+echo($v);
+?>
+
+2.Write a python program to create a dataframe of data values: (20,24,25,36,25,22,23,35,36). Find out Mean, Median, Mode, Range, Standard Deviation of this data	
+import statistics as st
+data=(20,24,25,36,25,22,23,35,36)
+print("Mean:",st.mean(data))
+print("Mode:",st.mode(data))
+print("Median:",st.median(data))
+range=max(data)-min(data)
+print("Range:",range)
+print("Standard deviation:",st.pstdev(data))
+
+						SLIP15
+1. Write a menu driven program to perform the following operation on an associative array. a) Display the elements of an array along wth key. b) Display the size of an array.
+<html>
+<body>
+<form method="post" action="asso.php">
+a) Display the elements of an array along wth key.<br>
+b) Display the size of an array.<br>
+Enter Any Choice::
+<input type="text" name="t1">
+<input type="submit" value="OK">
+</form>
+</body>
+</html>
+
+
+<?php
+ $a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:ksort($a);
+	        print_r($a);
+			break;
+	 case 2:$s=sizeof($a);
+	        echo($s);
+			break;
+ }
+ ?>
+ 2. Write a python program to create a dataframe of customer information containing columns name, age and address. Add 10 record to the dataframe . View the dataframe. Display data in bargraph .
+import pandas as pd
+from matplotlib import pyplot as plt
+data={'Name':['aa','bb','cc','dd','ee','ff','gg','hh','ii','jj'],
+'Class':['ty','ty','ty','ty','ty','ty','ty','ty','ty','ty'],
+'Per':[99,85,67,78,99,67,76,77,87,81]}
+df=pd.DataFrame(data)
+df.plot(kind="bar")
+plt.show()
+						SLIP16
+1. Write a menu driven program following operation on an associative array a)Reverse the order of each element’s key-value pair. b) Traverse the element in an array in random order. 
+<html>
+<body>
+<form method="post" action=array_fun.php>
+	 i) Reverse the order of each element’s key-value pair. <br>
+     2)  Traverse the element in an array in random order.  <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:krsort($a);
+	        echo("Key-value pair in reverse order:");
+	        print_r($a);
+			break;
+	 case 2:shuffle($a);
+	        print_r($a);
+			break;
+ }
+?>
+
+2. Write a python program to create a dataframe of data values: (5,9,25,12,4,30,5,20,12,5). Find out Mean, Median, Mode, Range, Standard Deviation of this data
+import statistics as st
+data=(5,9,25,12,4,30,5,20,12,5)
+print("Mean:",st.mean(data))
+print("Mode:",st.mode(data))
+print("Median:",st.median(data))
+range=max(data)-min(data)
+print("Range:",range)
+print("Standard deviation:",st.pstdev(data))
+
+						SLIP17
+1. Write php script to sort the following associative array Array(“Sophia=>”41”,”Jacob”=>”61”,”William”=>”29”,”Ramesh”=>”30”); a) Descending order sort by value b) Descending order sort by key 
+<html>
+<body>
+<form method="post" action=sort.php>
+	 i) Decending order sort by value <br>
+     2) Decending order sort by key <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$ch=$_POST["t1"];
+$a=array("Sophia"=>"31","Jacob"=>"41","William"=>"39","Ramesh"=>"40");
+switch($ch)
+{
+	case 1: arsort($a);
+	         print_r($a);
+			 break;
+	
+    case 2: krsort($a);
+             print_r($a);
+             break;
+}
+?>			
+
+2. Write a python program to create a dataframe of company information containing columns name, model and year. Add 10 record to the dataframe . View the dataframe. Display data in bargraph
+import pandas as pd
+from matplotlib import pyplot as plt
+data={'Name':['aa','bb','cc','dd','ee','ff','gg','hh','ii','jj'],
+'model':['FORTUNER','THAR','SCORPIO','SWIFT','creta','ceaz','city','alto','wagonr','i20'],
+'year':[2022,2021,2022,2010,2020,2002,2008,2022,2022,2028]}
+df=pd.DataFrame(data)
+df.plot(kind="bar")
+plt.show()
+
+
+						SLIP18
+1. Write a menu driven program to perform the following operation on an associative array. a) Display the elements of an array along with key. b) Display the size of an array.
+<html>
+<body>
+<form method="post" action="asso.php">
+a) Display the elements of an array along wth key.<br>
+b) Display the size of an array.<br>
+Enter Any Choice::
+<input type="text" name="t1">
+<input type="submit" value="OK">
+</form>
+</body>
+</html>
+
+
+<?php
+ $a=array("0"=>"10","2"=>"20","4"=>"60","3"=>"30","5"=>"50");
+ $ch=$_POST["t1"];
+ switch($ch)
+ {
+	 case 1:ksort($a);
+	        print_r($a);
+			break;
+	 case 2:$s=sizeof($a);
+	        echo($s);
+			break;
+ }
+ ?>
+
+ 2. Write a python program to create a dataframe with three column:Month, AvgTemp, and Rainfall. Display data in line chart
+
+						SLIP19
+1. Write a menu driven program to perform various file operations. Accept filename from user. a) Display type of file. b) Delete a file.
+<html>
+<body>
+<form method="post" action="file.php">
+Enter File name:: <br>
+<input type="text" name="t1">
+Enter your Choice::
+<input type="text" name="t2">
+a) Display type of file. 
+b) Delete a file
+<input type="submit" value="OK">
+</form>
+</body>
+</html>
+
+<?php
+    $ch=$_POST["t1"];
+	$file=$_POST["t2"];
+	$f=fopen($file,"r");
+	
+            switch($op)
+             {
+                case 1 : 
+                          $t=$_FILES['file']['type'];
+                           echo "Type  :".$t."</br>";
+                              break;
+
+                case 2:$f_name=$_FILES['file']['name'];
+                          $fh = fopen('$f_name','a');
+                               fclose($fh);
+                                  unlink($f_name);
+                                   echo "Deleted file is : ".$_FILES['file']['name']."</br>";
+                                      break;
+                }
+?>
+ 2. Write a python program to create a dataframe of data values: (12,36,60,24,45,65,66,98,75). Find out Mean, Median, Mode, Range, Standard Deviation of this data
+import statistics as st
+data=(12,36,60,24,45,65,66,98,75)
+print("Mean:",st.mean(data))
+print("Mode:",st.mode(data))
+print("Median:",st.median(data))
+range=max(data)-min(data)
+print("Range:",range)
+print("Standard deviation:",st.pstdev(data))
+
+						SLIP20	
+1. Write php script to sort the following associative array Array(“Sophia=>”31”,”Jacob”=>”41”,”William”=>”39”,”Ramesh”=>”40”); a) Ascending order sort by value b) Ascending order sort by key 
+<html>
+<body>
+<form method="post" action=sort.php>
+	 i) Ascending order sort by value <br>
+     2) Ascending order sort by key <br>
+	 Enter the choice:
+	<input type="text" name="t1">
+	<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+<?php
+$ch=$_POST["t1"];
+$a=array("Sophia"=>"31","Jacob"=>"41","William"=>"39","Ramesh"=>"40");
+switch($ch)
+{
+	case 1: sort($a);
+	         print_r($a);
+			 break;
+	
+    case 2: ksort($a);
+             print_r($a);
+             break;
+}
+?>			
+
+2. Write a python program to create a dataframe of data values: (12,36,60,24,45,65,66,98,75). Find out Mean, Median, Mode, Range, Standard Deviation of this data	
+import statistics as st
+data=(12,36,60,24,45,65,66,98,75)
+print("Mean:",st.mean(data))
+print("Mode:",st.mode(data))
+print("Median:",st.median(data))
+range=max(data)-min(data)
+print("Range:",range)
+print("Standard deviation:",st.pstdev(data))
+
